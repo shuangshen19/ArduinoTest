@@ -38,7 +38,10 @@ void loop(void)
       if(pHArrayIndex==ArrayLenth)pHArrayIndex=0;
       voltage = avergearray(pHArray, ArrayLenth)*5.0/1024;
       pHValue = 3.5*voltage+Offset;
+      // fixed
       pHValue = 14-pHValue;
+      if(pHValue > 8) pHValue += 1.15;
+      else if(pHValue < 6) pHValue -= 1.15; 
       samplingTime=millis();
   }
   if(millis() - printTime > printInterval)   //Every 800 milliseconds, print a numerical, convert the state of the LED indicator
